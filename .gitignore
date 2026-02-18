@@ -1,0 +1,60 @@
+# Global
+.env
+
+# Ignore data, config, etc.
+
+# AdGuard Home
+adguardhome/certs/
+adguardhome/conf/
+adguardhome/work/
+
+# Caddy
+caddy/caddy_data/
+caddy/caddy_config/
+
+# Home Assistant
+homeassistant/config/
+homeassistant/piper-data/
+homeassistant/whisper-data/
+
+# Homepage
+homepage/config/
+
+# Immich
+immich/cache/
+immich/library/
+immich/postgres/
+immich/.env
+
+# Jellyfin
+jellyfin/cache/
+jellyfin/config/
+
+# kiwix has none
+
+# n8n
+n8n/n8n-data/
+n8n/n8n-local-files/
+
+# Ollama-Open-WebUI
+ollama-openwebui/ollama/
+ollama-openwebui/open-webui/
+
+# Overleaf
+overleaf/
+
+# Portainer
+portainer/portainer_data/
+
+# Radicale
+radicale/data/
+
+# Speedtest Tracker
+speedtest-tracker/config/
+
+# Torrenting
+torrenting/*-config/
+
+# Uptime Kuma
+uptime-kuma/config/
+
