@@ -12,6 +12,9 @@
 	acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
 	dns cloudflare {env.CLOUDFLARE_API_TOKEN}
 
+	http_port 0
+	default_bind 100.118.102.64
+
 	log default {
 		level WARN
 		format console
