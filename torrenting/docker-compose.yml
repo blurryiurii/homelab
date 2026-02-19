@@ -1,0 +1,64 @@
+
+---
+services:
+  sonarr:  # tv series downloader
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    env_file:
+      - .env
+    volumes:
+      - /home/iurii/docker/torrenting/sonarr-config:/config
+      - /mnt/data/jellyfin/tv:/tv
+      - /mnt/data/jellyfin/downloads:/mnt/data/jellyfin/downloads
+    ports:
+      - 127.0.0.1:8989:8989
+    restart: unless-stopped
+    networks:
+      - shared
+
+  radarr:  # movies downloader
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    env_file:
+      - .env
+    volumes:
+      - /home/iurii/docker/torrenting/radarr-config:/config
+      - /mnt/data/jellyfin/movies:/movies
+      - /mnt/data/jellyfin/downloads:/mnt/data/jellyfin/downloads
+    ports:
+      - 127.0.0.1:7878:7878
+    restart: unless-stopped
+    networks:
+      - shared
+
+  lidarr:  # music downloader
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    env_file:
+      - .env
+    volumes:
+      - /home/iurii/docker/torrenting/lidarr-config:/config
+      - /mnt/data/jellyfin/music:/music
+      - /mnt/data/jellyfin/downloads:/mnt/data/jellyfin/downloads
+    ports:
+      - 127.0.0.1:8686:8686
+    restart: unless-stopped
+    networks:
+      - shared
+
+  prowlarr:  # indexer manager
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    env_file:
+      - .env
+    volumes:
+      - /home/iurii/docker/torrenting/prowlarr-config:/config
+    ports:
+      - 127.0.0.1:9696:9696
+    restart: unless-stopped
+    networks:
+      - shared
+
+networks:
+  shared:
+    driver: bridge

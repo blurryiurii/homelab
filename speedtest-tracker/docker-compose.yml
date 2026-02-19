@@ -1,0 +1,24 @@
+services:
+    speedtest-tracker:
+        image: lscr.io/linuxserver/speedtest-tracker:latest
+        restart: unless-stopped
+        container_name: speedtest-tracker
+        ports:
+            - 127.0.0.1:8081:80
+            # - 127.0.0.1:8443:443  # https
+        env_file:
+            - .env
+        environment:
+            - PUID=1000
+            - PGID=1000
+              # set APP_KEY and APP_URL in .env file
+            - DB_CONNECTION=sqlite
+            - SPEEDTEST_SCHEDULE=*/30 * * * *
+        volumes:
+            - /home/iurii/docker/speedtest-tracker/config:/config
+        networks:
+          - shared
+
+networks:
+  shared:
+    external: true

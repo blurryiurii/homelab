@@ -1,0 +1,16 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    restart: unless-stopped
+    volumes:
+      - /home/iurii/docker/adguardhome/work:/opt/adguardhome/work
+      - /home/iurii/docker/adguardhome/conf:/opt/adguardhome/conf
+      - /home/iurii/docker/adguardhome/certs:/certs:ro
+    network_mode: host
+    #ports:
+    #  - "53:53/tcp"  # plain dns
+    #  - "53:53/udp"  # ...and udp
+    #  - "853:853/tcp"  # dns-over-tls
+    #  - "853:853/udp"  # ...and udp
+    #  - "3003:3003"   # web ui

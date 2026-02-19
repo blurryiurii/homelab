@@ -1,0 +1,16 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: uptime-kuma
+    volumes:
+      - /home/iurii/docker/uptime-kuma/config:/app/data
+      - /run/user/1000/docker.sock:/var/run/docker.sock:ro
+      # also the root docker
+      - /var/run/docker.sock:/var/run/root-docker.sock:ro
+    ports:
+      - 127.0.0.1:3001:3001
+    restart: unless-stopped
+
+networks:
+  shared:
+    external: true

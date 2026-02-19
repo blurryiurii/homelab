@@ -1,0 +1,25 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+              count: all
+    ports:
+      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:9443:9443"
+      - "127.0.0.1:9000:9000"
+    volumes:
+      - /run/user/1000/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker-root.sock
+      - /home/$USER/docker/portainer/portainer_data:/data
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true

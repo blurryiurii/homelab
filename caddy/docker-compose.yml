@@ -1,0 +1,16 @@
+services:
+  caddy:
+    image: ghcr.io/caddybuilds/caddy-cloudflare:2
+    container_name: caddy
+    restart: unless-stopped
+    # ports:
+    #   - "80:80"
+    #   - "443:443"
+    #   - "443:443/udp"
+    network_mode: "host"
+    env_file:
+      - .env
+    volumes:
+      - /home/iurii/docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /home/iurii/docker/caddy/caddy_data:/data:Z  # SELinux-specific option
+      - /home/iurii/docker/caddy/caddy_config:/config:Z

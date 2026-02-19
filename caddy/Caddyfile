@@ -1,0 +1,81 @@
+# To use your own domain name (with automatic HTTPS), first make
+# sure your domain's A/AAAA DNS records are properly pointed to
+# this machine's public IP, then replace "example.com" below with your
+# domain name.
+
+# Create a .env with env.CLOUDFLARE_API_TOKEN=... with the API token permissions to edit DNS Zone Info (so it can modify DNS records to prove ownership)
+
+{
+	# Full list of global options: https://caddyserver.com/docs/caddyfile/options
+
+	# Set the ACME DNS challenge provider to use Cloudflare for all sites
+	acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+
+	log default {
+		level WARN
+		format console
+	}
+}
+
+# Reverse proxy subdomains
+adguardhome.iurii.io {
+	reverse_proxy http://localhost:3003
+}
+homeassistant.iurii.io {
+	reverse_proxy http://localhost:8123
+}
+homepage.iurii.io {
+	reverse_proxy http://localhost:3000
+}
+immich.iurii.io {
+	reverse_proxy http://localhost:2283
+}
+jellyfin.iurii.io {
+	reverse_proxy http://localhost:8096
+}
+kiwix.iurii.io {
+	reverse_proxy http://localhost:8080
+}
+lidarr.iurii.io {
+	reverse_proxy http://localhost:8686
+}
+llm.iurii.io {
+	reverse_proxy http://localhost:11434
+}
+n8n.iurii.io {
+	reverse_proxy http://localhost:5678
+}
+ollama.iurii.io {
+	reverse_proxy http://localhost:8082
+}
+overleaf.iurii.io {
+	reverse_proxy http://localhost:8000
+}
+portainer.iurii.io {
+	reverse_proxy http://localhost:9000
+}
+prowlarr.iurii.io {
+	reverse_proxy http://localhost:9696
+}
+qbittorrent.iurii.io {
+	reverse_proxy http://localhost:8085
+}
+radarr.iurii.io {
+	reverse_proxy http://localhost:7878
+}
+radicale.iurii.io {
+	reverse_proxy http://localhost:5232
+}
+sonarr.iurii.io {
+	reverse_proxy http://localhost:8989
+}
+speedtest.iurii.io {
+	reverse_proxy http://localhost:8081
+}
+syncthing.iurii.io {
+	reverse_proxy http://localhost:8384
+}
+uptimekuma.iurii.io {
+	reverse_proxy http://localhost:3001
+}
