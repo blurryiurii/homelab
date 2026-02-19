@@ -8,18 +8,18 @@ services:
       - /home/iurii/docker/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
-    privileged: true
+    # privileged: true
     # network_mode: host
     ports:
     - "127.0.0.1:8123:8123"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities:
-                - gpu
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: 1
+    #          capabilities:
+    #            - gpu
 # https://github.com/linuxserver/docker-faster-whisper
 # https://github.com/openai/whisper
   faster-whisper:
