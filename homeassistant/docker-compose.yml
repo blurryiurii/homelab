@@ -11,7 +11,7 @@ services:
     privileged: true
     # network_mode: host
     ports:
-    - "172.0.0.1:8123:8123"
+    - "127.0.0.1:8123:8123"
     deploy:
       resources:
         reservations:
@@ -37,7 +37,7 @@ services:
     volumes:
       - /home/iurii/docker/homeassistant/whisper-data:/config
     ports:
-      - 172.0.0.1:10300:10300
+      - 127.0.0.1:10300:10300
     restart: unless-stopped
     deploy:
       resources:
@@ -64,5 +64,5 @@ services:
     volumes:
       - /home/iurii/docker/homeassistant/piper-data:/config
     ports:
-      - 172.0.0.1:10200:10200
+      - 127.0.0.1:10200:10200
     restart: unless-stopped

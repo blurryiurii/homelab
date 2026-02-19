@@ -12,5 +12,4 @@ services:
     volumes:
       - /home/iurii/docker/homepage/config:/app/config  # make sure this directory exists.
       - /run/user/1000/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
-      - 
     restart: unless-stopped
