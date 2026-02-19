@@ -27,7 +27,7 @@ Primarily, I access these services remotely over [Tailscale](https://tailscale.c
 
 [Tailscale](https://tailscale.com/): Tunneling VPN for remote access
 - A homelab is even more awesome when you can use it outside your home
-- Not self-hosted, but you can consider [Headscale](https://github.com/juanfont/headscale) if you prefer a local solution.
+- Tailscale isn't self-hosted, but you can consider [Headscale](https://github.com/juanfont/headscale) if you prefer a local solution.
 - Not a full VPN unless you set up one of your devices an 'exit node'
 - Offers an awesome free tier of up to 100 devices
 
