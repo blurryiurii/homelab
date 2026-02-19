@@ -1,3 +1,5 @@
+# Reference: https://github.com/louislam/uptime-kuma
+
 services:
   uptime-kuma:
     image: louislam/uptime-kuma:2

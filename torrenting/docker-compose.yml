@@ -1,3 +1,8 @@
+# References:
+# https://github.com/linuxserver/docker-sonarr
+# https://github.com/linuxserver/docker-radarr
+# https://github.com/linuxserver/docker-lidarr
+# https://github.com/linuxserver/docker-prowlarr
 
 ---
 services:

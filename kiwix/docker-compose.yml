@@ -1,3 +1,5 @@
+# Reference: https://github.com/kiwix/kiwix-tools/blob/main/docker/server/docker-compose.yml.example
+
 services:
   kiwix-serve:
     image: ghcr.io/kiwix/kiwix-serve

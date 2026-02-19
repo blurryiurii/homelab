@@ -1,4 +1,4 @@
-# This compose file is set up for NVIDIA GPUs
+# Reference: https://github.com/open-webui/open-webui/blob/main/docker-compose.yaml
 
 services:
   ollama:

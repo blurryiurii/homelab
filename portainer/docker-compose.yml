@@ -1,3 +1,5 @@
+# Reference: https://docker-compose.de/en/portainer/
+
 services:
   portainer:
     image: portainer/portainer-ce:latest

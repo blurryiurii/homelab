@@ -1,3 +1,5 @@
+# Reference: https://github.com/blurryiurii/homelab
+
 services:
   adguardhome:
     image: adguard/adguardhome

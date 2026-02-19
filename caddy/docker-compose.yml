@@ -1,3 +1,5 @@
+# Reference: https://github.com/CaddyBuilds/caddy-cloudflare
+
 services:
   caddy:
     image: ghcr.io/caddybuilds/caddy-cloudflare:2
