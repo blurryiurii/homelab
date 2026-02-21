@@ -58,6 +58,7 @@ speedtest-tracker/config/
 
 # Torrenting
 torrenting/*-config/
+torrenting/gluetun-data/
 
 # Uptime Kuma
 uptime-kuma/config/
