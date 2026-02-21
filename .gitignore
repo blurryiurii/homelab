@@ -36,6 +36,10 @@ jellyfin/config/
 n8n/n8n-data/
 n8n/n8n-local-files/
 
+# ntfy
+ntfy/cache/
+ntfy/data
+
 # Ollama-Open-WebUI
 ollama-openwebui/ollama/
 ollama-openwebui/open-webui/

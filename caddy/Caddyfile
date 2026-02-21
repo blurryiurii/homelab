@@ -46,6 +46,9 @@ lidarr.iurii.io {
 llm.iurii.io {
 	reverse_proxy http://localhost:11434
 }
+ntfy.iurii.io {
+  reverse_proxy http://localhost:3002
+}
 n8n.iurii.io {
 	reverse_proxy http://localhost:5678
 }
