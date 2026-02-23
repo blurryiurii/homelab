@@ -91,11 +91,18 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 - Supports [cronjobs](https://cronitor.io/guides/cron-jobs) for periodic, scheduled tests
 - Connects Ookla's [speedtest.net](speedtest.net) servers for testing
 
+[Ntfy](https://ntfy.sh/): Push notifications ([GitHub](https://github.com/binwiederhier/ntfy))
+- Push notifications for Uptime Kuma (originally used Discord, but their [age verification policy](https://redact.dev/blog/discord-age-verification-clarification-what-they-arent-telling-you) is not cool.)
+- Works on my android & web notifications. If I remember right, push notifications require SSL (achieved with Caddy), otherwise you're stuck with periodic polling.
+
 ### AI & Automation
-[Ollama](https://ollama.com/): Open Models running locally
+[Ollama](https://ollama.com/): Open Models running locally ([GitHub](https://github.com/ollama/ollama))
 - Many integrations supported: n8n, OpenClaw, Open WebUI, RAG...
 - Honorable mentions: [LMstudio](https://lmstudio.ai/), [llama.cpp](https://github.com/ggml-org/llama.cpp)
 - Ollama/OpenWebUI [GitHub](https://github.com/open-webui/open-webui)
+
+[Llama.cpp](https://llama-cpp.com/): A faster inference backend ([GitHub](https://github.com/ggml-org/llama.cpp))
+- Tried this out, and it runs *way* faster than Ollama. I went from about 20 tokens/sec on a 3060 12GB to about 70 tokens on gpt-oss:20b! Plus, it has its own web interface.
 
 [Open WebUI](https://docs.openwebui.com/): Frontend Client for LLMs
 - Very familiar interface from ChatGPT
@@ -104,12 +111,12 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 
 [n8n](https://n8n.io/): AI workflow automation
 - Currently not in use in my setup...
-- Free to get started, but requires a license and online account to operate :(
+- Free to get started, but requires a license and online account to operate...
 - Integrates with Ollama for ✨Agentic AI✨, Discord and more for webhooks, logic/decision making blocks, and lots more functions
 
 ### Smart Home
 [Home Assistant](https://www.home-assistant.io/): Home Automation
-- How else can you control your light bulbs and garages? with a toggle switch?!
+- How else can you control your light bulbs and garages? with a light switch?!
 - Control lights, energy usage, set up automations with smart devices
 - Both mobile apps & web interface available
 - Android app includes a smart assistant

@@ -1,6 +1,26 @@
 # Reference: https://github.com/open-webui/open-webui/blob/main/docker-compose.yaml
 
 services:
+  # https://servicestack.net/posts/hosting-llama-server
+  gpt-oss:
+    image: ghcr.io/ggml-org/llama.cpp:server-cuda
+    container_name: gpt-oss
+    environment:
+      # - LLAMA_ARG_N_GPU_LAYERS=999
+      - LLAMA_ARG_MODEL=/models/gpt-oss-20b-Q4_K_M.gguf
+    ports:
+      - "10000:8080"
+    volumes:
+      # https://huggingface.co/unsloth/gpt-oss-20b-GGUF/resolve/main/gpt-oss-20b-Q4_K_M.gguf
+      - /home/iurii/docker/ollama-openwebui/models:/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
   ollama:
     image: ollama/ollama
     container_name: ollama
@@ -20,10 +40,13 @@ services:
     restart: unless-stopped
     pull_policy: always
     environment:
-      - OLLAMA_CONTEXT_LENGTH=4096
+      - OLLAMA_CONTEXT_LENGTH=8192
       - JWT_EXPIRES_IN=3600
-      - CORS_ALLOW_ORIGIN=http://localhost:8082,https://ollama.iurii.io
       - USER_AGENT=ollama
+      - CORS_ALLOW_ORIGIN=http://localhost:8082,https://ollama.iurii.io
+      - OLLAMA_KEEP_ALIVE=-1
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_KV_CACHE_TYPE=q8_0
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -36,8 +59,8 @@ services:
       - ollama
     restart: unless-stopped
     environment:
-      - 'OLLAMA_BASE_URL=http://ollama:11434'
-      - CORS_ALLOW_ORIGIN=http://localhost:8082,https://ollama.iurii.io
-      - 'WEBUI_SECRET_KEY='  # will just be generated when run
+      - OLLAMA_BASE_URL=https://ollama.iurii.io
+      - CORS_ALLOW_ORIGIN=https://ollama.iurii.io
+      - WEBUI_SECRET_KEY=  # will just be generated when run
     extra_hosts:
       - host.docker.internal:host-gateway

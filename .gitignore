@@ -43,6 +43,7 @@ ntfy/data
 # Ollama-Open-WebUI
 ollama-openwebui/ollama/
 ollama-openwebui/open-webui/
+ollama-openwebui/models/
 
 # Overleaf
 overleaf/
