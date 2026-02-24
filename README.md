@@ -102,6 +102,11 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 - Ollama/OpenWebUI [GitHub](https://github.com/open-webui/open-webui)
 - Tried out [llama.cpp](https://github.com/ggml-org/llama.cpp), but later realized Ollama already uses llama.cpp as its inference engine, and also, Homeassistant cannot use it as an integration.
 
+[FreshRSS](https://www.freshrss.org/): RSS news aggregator ([GitHub](https://github.com/FreshRSS/FreshRSS))
+- In an attempt to escape from curated YouTube feeds, my goal is to migrate to channels' RSS feeds (yes, [YouTube has them](https://chuck.is/yt-rss/))
+- 
+- As an Android client, I use [FeedMe](https://github.com/seazon/FeedMe/releases)
+
 [Open WebUI](https://docs.openwebui.com/): Frontend Client for LLMs
 - Very familiar interface from ChatGPT
 - Supports reasoning tags, RAG, Web Search, code execution, chat history

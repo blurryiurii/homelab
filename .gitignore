@@ -12,6 +12,9 @@ adguardhome/work/
 caddy/caddy_data/
 caddy/caddy_config/
 
+# FreshRSS
+freshrss/config/
+
 # Home Assistant
 homeassistant/config/
 homeassistant/piper-data/

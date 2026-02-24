@@ -1,0 +1,16 @@
+# https://github.com/FreshRSS/FreshRSS/tree/edge/Docker
+
+---
+services:
+  freshrss:
+    image: freshrss/freshrss:latest
+    container_name: freshrss
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /home/iurii/docker/freshrss/config:/config
+    ports:
+      - 127.0.0.1:3004:80
+    restart: unless-stopped

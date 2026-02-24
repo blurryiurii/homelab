@@ -24,6 +24,9 @@
 adguardhome.iurii.io {
 	reverse_proxy http://localhost:3003
 }
+freshrss.iurii.io {
+	reverse_proxy http://localhost:3004
+}
 homeassistant.iurii.io {
 	reverse_proxy http://localhost:8123
 }
