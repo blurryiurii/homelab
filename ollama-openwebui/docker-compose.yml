@@ -2,24 +2,24 @@
 
 services:
   # https://servicestack.net/posts/hosting-llama-server
-  gpt-oss:
-    image: ghcr.io/ggml-org/llama.cpp:server-cuda
-    container_name: gpt-oss
-    environment:
-      # - LLAMA_ARG_N_GPU_LAYERS=999
-      - LLAMA_ARG_MODEL=/models/gpt-oss-20b-Q4_K_M.gguf
-    ports:
-      - "10000:8080"
-    volumes:
-      # https://huggingface.co/unsloth/gpt-oss-20b-GGUF/resolve/main/gpt-oss-20b-Q4_K_M.gguf
-      - /home/iurii/docker/ollama-openwebui/models:/models
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+  # gpt-oss:
+  #   image: ghcr.io/ggml-org/llama.cpp:server-cuda
+  #   container_name: gpt-oss
+  #   environment:
+  #     # - LLAMA_ARG_N_GPU_LAYERS=999
+  #     - LLAMA_ARG_MODEL=/models/gpt-oss-20b-Q4_K_M.gguf
+  #   ports:
+  #     - "10000:8080"
+  #   volumes:
+  #     # https://huggingface.co/unsloth/gpt-oss-20b-GGUF/resolve/main/gpt-oss-20b-Q4_K_M.gguf
+  #     - /home/iurii/docker/ollama-openwebui/models:/models
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu]
 
   ollama:
     image: ollama/ollama
@@ -35,6 +35,7 @@ services:
                 - gpu
     volumes:
       - /home/iurii/docker/ollama-openwebui/ollama:/root/.ollama
+      - /home/iurii/docker/ollama-openwebui/models:/models
     ports:
       - "127.0.0.1:11434:11434"
     restart: unless-stopped

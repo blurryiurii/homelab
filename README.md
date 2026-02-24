@@ -98,11 +98,9 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 ### AI & Automation
 [Ollama](https://ollama.com/): Open Models running locally ([GitHub](https://github.com/ollama/ollama))
 - Many integrations supported: n8n, OpenClaw, Open WebUI, RAG...
-- Honorable mentions: [LMstudio](https://lmstudio.ai/), [llama.cpp](https://github.com/ggml-org/llama.cpp)
+- Honorable mentions: [LMstudio](https://lmstudio.ai/),
 - Ollama/OpenWebUI [GitHub](https://github.com/open-webui/open-webui)
-
-[Llama.cpp](https://llama-cpp.com/): A faster inference backend ([GitHub](https://github.com/ggml-org/llama.cpp))
-- Tried this out, and it runs *way* faster than Ollama. I went from about 20 tokens/sec on a 3060 12GB to about 70 tokens on gpt-oss:20b! Plus, it has its own web interface.
+- Tried out [llama.cpp](https://github.com/ggml-org/llama.cpp), but later realized Ollama already uses llama.cpp as its inference engine, and also, Homeassistant cannot use it as an integration.
 
 [Open WebUI](https://docs.openwebui.com/): Frontend Client for LLMs
 - Very familiar interface from ChatGPT
