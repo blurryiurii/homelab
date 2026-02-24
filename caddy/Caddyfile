@@ -90,3 +90,6 @@ syncthing.iurii.io {
 uptimekuma.iurii.io {
 	reverse_proxy http://localhost:3001
 }
+vaultwarden.iurii.io {
+	reverse_proxy http://localhost:3005
+}

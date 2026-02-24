@@ -67,3 +67,5 @@ torrenting/gluetun-data/
 # Uptime Kuma
 uptime-kuma/config/
 
+# Vaultwarden
+vaultwarden/vw-data/

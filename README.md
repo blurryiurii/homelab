@@ -80,6 +80,10 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 - Linked above is the hosted version. Local version setup instructions are [here](https://github.com/overleaf/toolkit/)
 - Unfortunately, the process is not a simple `docker-compose.yml` file and requires Overleaf's toolkit. However, their setup documentation is sufficient to get a community edition instance running. I left the directory out of this repo.
 
+[Vaultwarden (BitWarden)](https://www.vaultwarden.net/): Password manager ([GitHub](https://github.com/dani-garcia/vaultwarden))
+- Passwords, one-Time codes (TOTP), SSH keys, notes, etc., it stores it all!
+- Works with the official BitWarden apps and browser extensions.
+
 ### Observability & Monitoring
 [Uptime Kuma](https://uptimekuma.org/): An easy-to-use uptime monitor ([GitHub](https://github.com/louislam/uptime-kuma))
 - With all these services, you want to know if one of them goes down. Or your website. Or maybe your Smart Bread Toaster.
@@ -104,7 +108,6 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 
 [FreshRSS](https://www.freshrss.org/): RSS news aggregator ([GitHub](https://github.com/FreshRSS/FreshRSS))
 - In an attempt to escape from curated YouTube feeds, my goal is to migrate to channels' RSS feeds (yes, [YouTube has them](https://chuck.is/yt-rss/))
-- 
 - As an Android client, I use [FeedMe](https://github.com/seazon/FeedMe/releases)
 
 [Open WebUI](https://docs.openwebui.com/): Frontend Client for LLMs
@@ -143,8 +146,6 @@ Copy these folders and their respective `docker-compose.yml` files. For the most
 
 ## Future Improvements & Honorable Mentions
 Going forward, I'd like to configure Wireguard myself and remove dependency on Tailscale's servers to relay connections between my devices using Headscale.
-
-[Vaultwarden server](https://github.com/dani-garcia/vaultwarden) for passwords and one-time codes.
 
 Also, while I have sufficient uptime on just one desktop, I would like to set up a load balancer / high availability (HA) at some point in the future, such that if one server goes down, another one processes requests.
 
