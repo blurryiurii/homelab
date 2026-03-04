@@ -31,9 +31,3 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    networks:
-      - shared
-
-networks:
-  shared:
-    external: true

@@ -37,9 +37,3 @@ services:
         max-file: "3"
     volumes:
       - /home/iurii/docker/radicale/data:/data
-    networks:
-      - shared
-
-networks:
-  shared:
-    external: true

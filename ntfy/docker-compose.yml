@@ -31,9 +31,3 @@ services:
     cap_drop:
       - ALL
     init: true # needed, if healthcheck is used. Prevents zombie processes
-    networks:
-      - shared
-
-networks:
-  shared:
-    external: true

@@ -39,9 +39,3 @@ services:
       start_period: 30s
     extra_hosts:
       - 'host.docker.internal:host-gateway'
-    networks:
-      - shared
-
-networks:
-  shared:
-    external: true

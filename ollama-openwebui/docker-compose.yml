@@ -50,14 +50,6 @@ services:
       options:
         max-size: 10m
         max-file: "3"
-    networks:
-      - shared
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:11434"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
-    #   start_period: 30s
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -87,11 +79,3 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    extra_hosts:
-      - host.docker.internal:host-gateway
-    networks:
-      - shared
-
-networks:
-  shared:
-    external: true

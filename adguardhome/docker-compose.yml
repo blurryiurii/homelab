@@ -10,6 +10,7 @@ services:
       - no-new-privileges:true
     environment:
       - TZ=America/Chicago
+    network_mode: "host"
     logging:
       options:
         max-size: 10m
@@ -28,9 +29,3 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    networks:
-      - shared
-
-networks:
-  shared:
-    external: true
