@@ -1,12 +1,29 @@
+---
 # Reference: https://github.com/kiwix/kiwix-tools/blob/main/docker/server/docker-compose.yml.example
 
 services:
   kiwix-serve:
     image: ghcr.io/kiwix/kiwix-serve
     container_name: kiwix
+    environment:
+      - TZ=America/Chicago
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     volumes:
       - /mnt/data/wiki:/data:ro
     ports:
       - 127.0.0.1:8080:8080
     command: '*.zim'
     restart: unless-stopped
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true

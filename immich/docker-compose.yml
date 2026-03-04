@@ -1,3 +1,4 @@
+---
 # Reference: https://immich.app/docs/install/docker-compose
 # Current release's compose: https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
 
@@ -7,6 +8,8 @@ services:
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    security_opt:
+      - no-new-privileges:true
     deploy:
       resources:
         reservations:
@@ -32,13 +35,20 @@ services:
     restart: unless-stopped
     healthcheck:
       disable: false
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
     group_add:
       - video
-    gpus: all
+    networks:
+      - shared
 
   immich-machine-learning:
     container_name: immich_machine_learning
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}-cuda
+    security_opt:
+      - no-new-privileges:true
     deploy:
       resources:
         reservations:
@@ -52,9 +62,14 @@ services:
     env_file:
       - .env
     restart: unless-stopped
-    gpus: all
     healthcheck:
       disable: false
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - shared
 
   redis:
     container_name: immich_redis
@@ -62,6 +77,12 @@ services:
     healthcheck:
       test: redis-cli ping || exit 1
     restart: unless-stopped
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - shared
 
   database:
     container_name: immich_postgres
@@ -73,15 +94,21 @@ services:
       - /home/iurii/docker/immich/postgres/:/var/lib/postgresql/data
     # healthcheck:
     #   test: >-
-    #     pg_isready --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" || exit 1; Chksum="$$(psql --dbname="$${POSTGRES_DB}" --username="$${POSTGRES_USER}" --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
+    #     pg_isready --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' || exit 1; Chksum="$$(psql --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' --tuples-only --no-align --command='SELECT SUM(checksum_failures) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
     #   interval: 5m
     #   start_interval: 30s
     #   start_period: 5m
     command: >-
       postgres -c shared_preload_libraries='vectors.so, vchord' -c 'search_path="$${user}", public, vectors' -c logging_collector=on -c max_wal_size=2GB -c shared_buffers=512MB -c wal_compression=on
     restart: unless-stopped
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
     shm_size: 128mb
+    networks:
+      - shared
 
 networks:
-  immich_shared:
-    name: immich_shared
+  shared:
+    external: true

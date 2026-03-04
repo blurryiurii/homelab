@@ -1,3 +1,4 @@
+---
 # Reference:
 # https://github.com/tomsquest/docker-radicale/blob/master/docker-compose.yml
 
@@ -28,6 +29,12 @@ services:
       interval: 30s
       retries: 3
     restart: unless-stopped
+    environment:
+      - TZ=America/Chicago
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
     volumes:
       - /home/iurii/docker/radicale/data:/data
     networks:

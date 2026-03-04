@@ -1,3 +1,4 @@
+---
 # https://github.com/dani-garcia/vaultwarden
 
 services:
@@ -5,9 +6,31 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     environment:
       DOMAIN: "https://vaultwarden.iurii.io"
+      TZ: "America/Chicago"
     volumes:
       - /home/iurii/docker/vaultwarden/vw-data/:/data/
     ports:
       - 127.0.0.1:3005:80
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/alive"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true

@@ -1,3 +1,4 @@
+---
 # Reference: https://github.com/open-webui/open-webui/blob/main/docker-compose.yaml
 
 services:
@@ -39,15 +40,24 @@ services:
     ports:
       - "127.0.0.1:11434:11434"
     restart: unless-stopped
-    pull_policy: always
     environment:
       - OLLAMA_CONTEXT_LENGTH=8192
-      - JWT_EXPIRES_IN=3600
-      - USER_AGENT=ollama
-      - CORS_ALLOW_ORIGIN=http://localhost:8082,https://ollama.iurii.io
       - OLLAMA_KEEP_ALIVE=-1
       - OLLAMA_FLASH_ATTENTION=1
       - OLLAMA_KV_CACHE_TYPE=q8_0
+      - TZ=America/Chicago
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - shared
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:11434"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 30s
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -56,12 +66,32 @@ services:
       - "127.0.0.1:8082:8080"
     volumes:
       - /home/iurii/docker/ollama-openwebui/open-webui:/app/backend/data
-    depends_on:
-      - ollama
+    # depends_on:
+    #   ollama:
+    #     condition: service_healthy
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     environment:
       - OLLAMA_BASE_URL=https://ollama.iurii.io
       - CORS_ALLOW_ORIGIN=https://ollama.iurii.io
-      - WEBUI_SECRET_KEY=  # will just be generated when run
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
+      - TZ=America/Chicago
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     extra_hosts:
       - host.docker.internal:host-gateway
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true

@@ -1,9 +1,14 @@
+---
 # Reference: https://github.com/louislam/uptime-kuma
 
 services:
   uptime-kuma:
     image: louislam/uptime-kuma:2
     container_name: uptime-kuma
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=America/Chicago
     volumes:
       - /home/iurii/docker/uptime-kuma/config:/app/data
       - /run/user/1000/docker.sock:/var/run/docker.sock:ro
@@ -12,6 +17,12 @@ services:
     ports:
       - 127.0.0.1:3001:3001
     restart: unless-stopped
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - shared
 
 networks:
   shared:

@@ -1,3 +1,4 @@
+---
 # Reference: https://docs.n8n.io/hosting/installation/server-setups/docker-compose/
 
 services:
@@ -5,6 +6,8 @@ services:
     image: docker.n8n.io/n8nio/n8n
     container_name: n8n
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "127.0.0.1:5678:5678"
     environment:
@@ -15,6 +18,23 @@ services:
       - NODE_ENV=production
       - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      - TZ=America/Chicago
     volumes:
       - /home/iurii/docker/n8n/n8n-data:/home/node/.n8n
       - /home/iurii/docker/n8n/n8n-local-files:/files
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:5678/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true

@@ -17,7 +17,14 @@ services:
     logging:
       options:
         max-size: 10m
+        max-file: "3"
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - shared
     healthcheck:
       test: ["CMD", "cli/health.php"]
       timeout: 10s
@@ -25,3 +32,7 @@ services:
       start_interval: 11s
       interval: 75s
       retries: 3
+
+networks:
+  shared:
+    external: true

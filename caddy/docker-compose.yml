@@ -12,10 +12,8 @@ services:
       - "80:80"
       - "443:443"
       - "443:443/udp"
-    user: "0"
     extra_hosts:
-      - "host.docker.internal:192.168.16.1"
-    # network_mode: "host"
+      - "host.docker.internal:10.0.2.2"
     env_file:
       - .env
     logging:

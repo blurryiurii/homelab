@@ -1,3 +1,4 @@
+---
 # Reference: https://jellyfin.org/docs/general/installation/container/
 
 services:
@@ -9,9 +10,12 @@ services:
         reservations:
           devices:
             - capabilities: [gpu]
+    security_opt:
+      - no-new-privileges:true
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+      - TZ=America/Chicago
     ports:
       - "127.0.0.1:8096:8096/tcp"  # http
       # - "8920:8920/tcp"  # https
@@ -23,6 +27,16 @@ services:
         target: /media
         read_only: true
     restart: unless-stopped
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8096/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     networks:
