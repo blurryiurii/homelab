@@ -22,71 +22,71 @@
 
 # Reverse proxy subdomains
 adguardhome.iurii.io {
-	reverse_proxy http://adguardhome:3003
+	reverse_proxy http://localhost:3003
 }
 freshrss.iurii.io {
-	reverse_proxy http://freshrss:80
+	reverse_proxy http://localhost:80
 }
 homeassistant.iurii.io {
-	reverse_proxy http://homeassistant:8123
+	reverse_proxy http://localhost:8123
 }
 homepage.iurii.io {
-	reverse_proxy http://homepage:3000
+	reverse_proxy http://localhost:3000
 }
 immich.iurii.io {
-	reverse_proxy http://immich_server:2283
+	reverse_proxy http://localhost:2283
 }
 jellyfin.iurii.io {
-	reverse_proxy http://jellyfin:8096
+	reverse_proxy http://localhost:8096
 }
 kiwix.iurii.io {
-	reverse_proxy http://kiwix:8080
+	reverse_proxy http://localhost:8080
 }
 lidarr.iurii.io {
-	reverse_proxy http://gluetun:8686
+	reverse_proxy http://localhost:8686
 }
 llm.iurii.io {
-	reverse_proxy http://ollama:11434
+	reverse_proxy http://localhost:11434
 }
 ntfy.iurii.io {
-	reverse_proxy http://ntfy:80
+	reverse_proxy http://localhost:80
 }
 n8n.iurii.io {
-	reverse_proxy http://n8n:5678
+	reverse_proxy http://localhost:5678
 }
 ollama.iurii.io {
-	reverse_proxy http://open-webui:8080
+	reverse_proxy http://localhost:8080
 }
 overleaf.iurii.io {
-	reverse_proxy http://sharelatex:8000
+	reverse_proxy http://localhost:8000
 }
 portainer.iurii.io {
-	reverse_proxy http://portainer:9000
+	reverse_proxy http://localhost:9000
 }
 prowlarr.iurii.io {
-	reverse_proxy http://gluetun:9696
+	reverse_proxy http://localhost:9696
 }
 qbittorrent.iurii.io {
-	reverse_proxy http://gluetun:8085
+	reverse_proxy http://localhost:8085
 }
 radarr.iurii.io {
-	reverse_proxy http://gluetun:7878
+	reverse_proxy http://localhost:7878
 }
 radicale.iurii.io {
-	reverse_proxy http://radicale:5232
+	reverse_proxy http://localhost:5232
 }
 sonarr.iurii.io {
-	reverse_proxy http://gluetun:8989
+	reverse_proxy http://localhost:8989
 }
 speedtest.iurii.io {
-	reverse_proxy http://speedtest-tracker:80
+	reverse_proxy http://localhost:80
 }
 syncthing.iurii.io {
-	reverse_proxy http://syncthing:8384
+	reverse_proxy http://localhost:8384
 }
 uptimekuma.iurii.io {
-	reverse_proxy http://uptime-kuma:3001
+	reverse_proxy http://localhost:3001
 }
 vaultwarden.iurii.io {
-	reverse_proxy http://vaultwarden:80
+	reverse_proxy http://localhost:80
 }
