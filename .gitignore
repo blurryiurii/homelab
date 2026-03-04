@@ -13,7 +13,7 @@ caddy/caddy_data/
 caddy/caddy_config/
 
 # FreshRSS
-freshrss/config/
+freshrss/data/
 
 # Home Assistant
 homeassistant/config/
