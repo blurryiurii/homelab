@@ -21,6 +21,12 @@ services:
       - /home/iurii/docker/torrenting/sonarr-config:/config
       - /mnt/data/jellyfin/tv:/tv
       - /mnt/data/jellyfin/downloads:/downloads
+    healthcheck:
+      test: ["CMD-SHELL","wget -q --spider http://localhost:8989 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     network_mode: "service:gluetun"
     depends_on:
       gluetun:
@@ -44,6 +50,12 @@ services:
       - /home/iurii/docker/torrenting/radarr-config:/config
       - /mnt/data/jellyfin/movies:/movies
       - /mnt/data/jellyfin/downloads:/downloads
+    healthcheck:
+      test: ["CMD-SHELL","wget -q --spider http://localhost:7878 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     network_mode: "service:gluetun"
     depends_on:
       gluetun:
@@ -67,6 +79,12 @@ services:
       - /home/iurii/docker/torrenting/lidarr-config:/config
       - /mnt/data/jellyfin/music:/music
       - /mnt/data/jellyfin/downloads:/downloads
+    healthcheck:
+      test: ["CMD-SHELL","wget -q --spider http://localhost:8686 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     network_mode: "service:gluetun"
     depends_on:
       gluetun:
@@ -88,6 +106,12 @@ services:
       - TZ=America/Chicago
     volumes:
       - /home/iurii/docker/torrenting/prowlarr-config:/config
+    healthcheck:
+      test: ["CMD-SHELL","wget -q --spider http://localhost:9696 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     network_mode: "service:gluetun"
     depends_on:
       gluetun:
@@ -155,6 +179,12 @@ services:
       - /home/iurii/docker/torrenting/qbittorrent-config:/config
       - /mnt/data/jellyfin/downloads:/downloads
       - /mnt/data/wiki:/wiki
+    healthcheck:
+      test: ["CMD-SHELL","curl http://localhost:8085 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     restart: unless-stopped
     logging:
       options:
