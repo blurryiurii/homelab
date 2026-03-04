@@ -22,6 +22,12 @@ services:
       - "100.118.102.64:53:53/tcp"  # DNS
       - "100.118.102.64:53:53/udp"
       - "100.118.102.64:3003:3003"  # web UI
+    healthcheck:
+      test: ["CMD-SHELL","wget -q --spider http://localhost:3003 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     networks:
       - shared
 
