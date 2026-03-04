@@ -27,10 +27,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
+    network_mode: "container:gluetun"
     restart: unless-stopped
     logging:
       options:
@@ -56,10 +53,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
+    network_mode: "container:gluetun"
     restart: unless-stopped
     logging:
       options:
@@ -85,10 +79,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
+    network_mode: "container:gluetun"
     restart: unless-stopped
     logging:
       options:
@@ -112,55 +103,12 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
+    network_mode: "container:gluetun"
     restart: unless-stopped
     logging:
       options:
         max-size: 10m
         max-file: "3"
-
-  gluetun:
-    image: qmcgaw/gluetun
-    container_name: gluetun
-    # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
-    cap_add:
-      - NET_ADMIN
-    cap_drop:
-      - ALL
-    security_opt:
-      - no-new-privileges:true
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    ports:
-      - 127.0.0.1:6881:6881
-      - 127.0.0.1:6881:6881/udp
-      - 127.0.0.1:8989:8989  # sonarr
-      - 127.0.0.1:7878:7878  # radarr
-      - 127.0.0.1:8686:8686  # lidarr
-      - 127.0.0.1:9696:9696  # prowlarr
-      - 127.0.0.1:8085:8085  # qbittorrent
-    volumes:
-      - /home/iurii/docker/torrenting/gluetun-data:/gluetun
-    env_file:
-      - .env
-    environment:
-      - TZ=America/Chicago
-    restart: unless-stopped
-    logging:
-      options:
-        max-size: 10m
-        max-file: "3"
-    healthcheck:
-      test: ["CMD", "/gluetun-entrypoint", "healthcheck"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
-    networks:
-      - shared
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -171,10 +119,7 @@ services:
       - .env
     environment:
       - TZ=America/Chicago
-    network_mode: "service:gluetun"
-    depends_on:
-      gluetun:
-        condition: service_healthy
+    network_mode: "container:gluetun"
     volumes:
       - /home/iurii/docker/torrenting/qbittorrent-config:/config
       - /mnt/data/jellyfin/downloads:/downloads

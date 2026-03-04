@@ -15,6 +15,9 @@ caddy/caddy_config/
 # FreshRSS
 freshrss/data/
 
+# Gluetun
+gluetun/data/
+
 # Home Assistant
 homeassistant/config/
 homeassistant/piper-data/
@@ -65,7 +68,6 @@ syncthing/data/
 
 # Torrenting
 torrenting/*-config/
-torrenting/gluetun-data/
 
 # Uptime Kuma
 uptime-kuma/config/
