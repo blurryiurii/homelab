@@ -17,11 +17,8 @@ services:
       - /home/iurii/docker/torrenting/sonarr-config:/config
       - /mnt/data/jellyfin/tv:/tv
       - /mnt/data/jellyfin/downloads:/downloads
-    ports:
-      - 127.0.0.1:8989:8989
+    network_mode: "service:gluetun"
     restart: unless-stopped
-    networks:
-      - shared
 
   radarr:  # movies downloader
     image: lscr.io/linuxserver/radarr:latest
@@ -32,11 +29,8 @@ services:
       - /home/iurii/docker/torrenting/radarr-config:/config
       - /mnt/data/jellyfin/movies:/movies
       - /mnt/data/jellyfin/downloads:/downloads
-    ports:
-      - 127.0.0.1:7878:7878
+    network_mode: "service:gluetun"
     restart: unless-stopped
-    networks:
-      - shared
 
   lidarr:  # music downloader
     image: lscr.io/linuxserver/lidarr:latest
@@ -47,11 +41,8 @@ services:
       - /home/iurii/docker/torrenting/lidarr-config:/config
       - /mnt/data/jellyfin/music:/music
       - /mnt/data/jellyfin/downloads:/downloads
-    ports:
-      - 127.0.0.1:8686:8686
+    network_mode: "service:gluetun"
     restart: unless-stopped
-    networks:
-      - shared
 
   prowlarr:  # indexer manager
     image: lscr.io/linuxserver/prowlarr:latest
@@ -60,11 +51,8 @@ services:
       - .env
     volumes:
       - /home/iurii/docker/torrenting/prowlarr-config:/config
-    ports:
-      - 127.0.0.1:9696:9696
+    network_mode: "service:gluetun"
     restart: unless-stopped
-    networks:
-      - shared
 
   gluetun:
     image: qmcgaw/gluetun
@@ -75,12 +63,13 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     ports:
-      - 127.0.0.1:8085:8085
       - 127.0.0.1:6881:6881
       - 127.0.0.1:6881:6881/udp
-      # - 127.0.0.1:8888:8888/tcp # HTTP proxy
-      # - 127.0.0.1:8388:8388/tcp # Shadowsocks
-      # - 127.0.0.1:8388:8388/udp # Shadowsocks
+      - 127.0.0.1:8989:8989  # sonarr
+      - 127.0.0.1:7878:7878  # radarr
+      - 127.0.0.1:8686:8686  # lidarr
+      - 127.0.0.1:9696:9696  # prowlarr
+      - 127.0.0.1:8085:8085  # qbittorrent
     volumes:
       - /home/iurii/docker/torrenting/gluetun-data:/gluetun
     env_file:
