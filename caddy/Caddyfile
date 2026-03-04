@@ -82,7 +82,7 @@ speedtest.iurii.io {
 	reverse_proxy http://speedtest-tracker:80
 }
 syncthing.iurii.io {
-	reverse_proxy http://localhost:8384
+	reverse_proxy http://syncthing:8384
 }
 uptimekuma.iurii.io {
 	reverse_proxy http://uptime-kuma:3001

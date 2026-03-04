@@ -82,6 +82,12 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 - Passwords, one-Time codes (TOTP), SSH keys, notes, etc., it stores it all!
 - Works with the official BitWarden apps and browser extensions.
 
+[Syncthing](https://syncthing.net/): File Synchronization ([GitHub](https://github.com/syncthing/syncthing))
+- One of my most used services, keeping the same copy of files across all my personal devices
+- Synchronizes my phone's photos in seconds, enabling Immich to host the most up-to-date library
+- Very configurable - file versioning, restoring, ignore patterns...
+- available on iOS too
+
 ### Observability & Monitoring
 [Uptime Kuma](https://uptimekuma.org/): An easy-to-use uptime monitor ([GitHub](https://github.com/louislam/uptime-kuma))
 - With all these services, you want to know if one of them goes down. Or your website. Or maybe your Smart Bread Toaster.
