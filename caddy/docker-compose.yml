@@ -1,3 +1,4 @@
+---
 # Reference: https://github.com/CaddyBuilds/caddy-cloudflare
 
 services:
@@ -5,14 +6,29 @@ services:
     image: ghcr.io/caddybuilds/caddy-cloudflare:2
     container_name: caddy
     restart: unless-stopped
-    # ports:
-    #   - "80:80"
-    #   - "443:443"
-    #   - "443:443/udp"
-    network_mode: "host"
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    user: "0"
+    extra_hosts:
+      - "host.docker.internal:192.168.16.1"
+    # network_mode: "host"
     env_file:
       - .env
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
     volumes:
-      - /home/iurii/docker/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - /home/iurii/docker/caddy/caddy_data:/data:Z  # SELinux-specific option
+      - /home/iurii/docker/caddy/Caddyfile:/etc/caddy/Caddyfile:Z
+      - /home/iurii/docker/caddy/caddy_data:/data:Z
       - /home/iurii/docker/caddy/caddy_config:/config:Z
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true

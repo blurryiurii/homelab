@@ -1,3 +1,4 @@
+---
 # Reference: https://github.com/blurryiurii/homelab
 
 services:
@@ -5,14 +6,25 @@ services:
     image: adguard/adguardhome
     container_name: adguardhome
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=America/Chicago
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
     volumes:
-      - /home/iurii/docker/adguardhome/work:/opt/adguardhome/work
-      - /home/iurii/docker/adguardhome/conf:/opt/adguardhome/conf
-      - /home/iurii/docker/adguardhome/certs:/certs:ro
-    network_mode: host
-    #ports:
-    #  - "53:53/tcp"  # plain dns
-    #  - "53:53/udp"  # ...and udp
-    #  - "853:853/tcp"  # dns-over-tls
-    #  - "853:853/udp"  # ...and udp
-    #  - "3003:3003"   # web ui
+      - /home/iurii/docker/adguardhome/work:/opt/adguardhome/work:Z
+      - /home/iurii/docker/adguardhome/conf:/opt/adguardhome/conf:Z
+      - /home/iurii/docker/adguardhome/certs:/certs:ro,Z
+    ports:
+      - "100.118.102.64:53:53/tcp"  # DNS
+      - "100.118.102.64:53:53/udp"
+      - "100.118.102.64:3003:3003"  # web UI
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true

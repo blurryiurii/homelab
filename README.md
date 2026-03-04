@@ -1,4 +1,4 @@
-# Iurii's Homelab
+# Iurii's Personal Homelab
 
 This repository contains my configuration for all my self-hosted services using Docker, curated and configured over the course of over two (dating back to late 2024, I think?). Reference this repo to build a few services of your own, and adjust them to your own liking!
 
@@ -9,7 +9,6 @@ By using these services, you become responsible for your hosting strategy, hardw
 Also, you don't need to make money from these services. So, your homelab is inherently ad-free.
 
 And of course, setting up these services is quick, easy, and free ([*libre*, and *gratis*](https://en.wikipedia.org/wiki/Gratis_versus_libre)).
-
 
 ## Overview
 Primarily, I access these services remotely over [Tailscale](https://tailscale.com/) so I don't have to be on the same LAN at any given time. These are all served by one desktop running [Fedora Linux](https://fedoraproject.org/) with [Docker Compose](https://docs.docker.com/compose/install) installed.
@@ -68,7 +67,6 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 - For Android, I use [DAVx5](https://www.davx5.com/) as the synchronization tool
 - As clients, I use [Fossify calendar](https://github.com/FossifyOrg/Calendar), and [Tasks.org](https://tasks.org/fos). On desktop, I use [Mozilla Thunderbird](https://www.thunderbird.net/en-US/thunderbird/all/).
 
-
 [Kiwix](https://kiwix.org/en/): Wiki(pedia) Hosting
 - Demo available [here](https://library.kiwix.org/#lang=eng)
 - World's knowledge, history, biographies, the fall of the Ottoman Empire, and Martial art forms, all on your hard drive
@@ -80,7 +78,7 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 - Linked above is the hosted version. Local version setup instructions are [here](https://github.com/overleaf/toolkit/)
 - Unfortunately, the process is not a simple `docker-compose.yml` file and requires Overleaf's toolkit. However, their setup documentation is sufficient to get a community edition instance running. I left the directory out of this repo.
 
-[Vaultwarden (BitWarden)](https://www.vaultwarden.net/): Password manager ([GitHub](https://github.com/dani-garcia/vaultwarden))
+[Vaultwarden (BitWarden client)](https://www.vaultwarden.net/): Password manager ([GitHub](https://github.com/dani-garcia/vaultwarden))
 - Passwords, one-Time codes (TOTP), SSH keys, notes, etc., it stores it all!
 - Works with the official BitWarden apps and browser extensions.
 
@@ -118,11 +116,11 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 [n8n](https://n8n.io/): AI workflow automation
 - Currently not in use in my setup...
 - Free to get started, but requires a license and online account to operate...
-- Integrates with Ollama for ✨Agentic AI✨, Discord and more for webhooks, logic/decision making blocks, and lots more functions
+- Integrates with Ollama for ✨Agentic AI✨, Discord/ntfy (etc.) for webhooks, logic/decision making blocks, and lots more functions
 
 ### Smart Home
 [Home Assistant](https://www.home-assistant.io/): Home Automation
-- How else can you control your light bulbs and garages? with a light switch?!
+- How else can you possibly control your light bulbs... with a light switch?!
 - Control lights, energy usage, set up automations with smart devices
 - Both mobile apps & web interface available
 - Android app includes a smart assistant
@@ -142,17 +140,17 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 ## How To Get Started
 Getting started requires some basic knowledge of `docker compose`. Read [this excellent official guide](https://docs.docker.com/compose/gettingstarted). You can also use [Docker Desktop](https://www.docker.com/products/docker-desktop/) for GUI management.
 
-Copy these folders and their respective `docker-compose.yml` files. For the most part, the web interfaces will be available as specified in the compose file.
+Clone this repo and their respective `docker-compose.yml` files. For the most part, the web interfaces will be available as specified in the compose file.
 
 ## Future Improvements & Honorable Mentions
 Going forward, I'd like to configure Wireguard myself and remove dependency on Tailscale's servers to relay connections between my devices using Headscale.
 
-Also, while I have sufficient uptime on just one desktop, I would like to set up a load balancer / high availability (HA) at some point in the future, such that if one server goes down, another one processes requests.
+Also, while I have sufficient uptime on just one desktop, I would like to set up a load balancer / high availability (HA) at some point in the future, such that if one server goes down, another one processes requests seamlessly.
 
 ## Maintenance
-I run [rootless docker](https://docs.docker.com/engine/security/rootless/) for all containers here except for Caddy and AdGuard home, since those require privileged ports (<1024). You may need to run the update script as sudo if you run rootful docker.
+I run [rootless docker](https://docs.docker.com/engine/security/rootless/) for all my containers. You need to run the update script as sudo if you run rootful docker (the default installation).
 
-Updating these services involves a docker compose command to pull and one to bring the new version up (for the most part; looking at you, overleaf). This script will need interaction if overleaf needs an upgrade.
+Updating these services involves a docker compose command to pull any new versions and one to bring the new version up (except you, overleaf). This script will need interaction if overleaf needs an upgrade.
 
 Note: services may introduce breaking changes at any time, so this can be risky to run! Read the release notes for your services or face the risk (like I do) if you prefer scripted updates instead of one-by-one. Run it with
 > `./update.sh`

@@ -1,24 +1,14 @@
 #!/usr/bin/env bash
 
-# This script will update all containers as specified in the docker-compose files
-# Privileged containers are updated as root.
-# Also, overleaf doesn't use regular docker-compose.yml, so it's handled separately.
+# This script will update all containers as specified in docker-compose.yml's
+# Overleaf doesn't use regular docker-compose.yml, so it's handled separately.
 
-set -euo pipefail
+set -euo pipefail  # fail early
 
 # run from script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR" || exit 1
 echo "Updating containers in ${SCRIPT_DIR}"
-
-# update Caddy and AdGuard Home as root
-if [ -d "caddy" ]; then
-  (cd "$SCRIPT_DIR/caddy" && sudo docker compose pull && sudo docker compose up -d --remove-orphans)
-fi
-
-if [ -d "adguardhome" ]; then
-  (cd "$SCRIPT_DIR/adguardhome" && sudo docker compose pull && sudo docker compose up -d --remove-orphans)
-fi
 
 # Overleaf: run overleaf/bin/upgrade, then up
 if [ -d "overleaf" ]; then
@@ -27,8 +17,8 @@ if [ -d "overleaf" ]; then
 fi
 
 for dir in */; do
-  # Skip exceptions
-  excluded=( "caddy/" "adguardhome/" "overleaf/" "portainer/" )
+  # Skip exceptions: overleaf has custom binaries, portainer is no longer used
+  excluded=("overleaf/" "portainer/" )
   skip=0
   for ex in "${excluded[@]}"; do
     [[ "$dir" == "$ex" ]] && { skip=1; break; }
