@@ -10,7 +10,7 @@ services:
       - no-new-privileges:true
     environment:
       - TZ=America/Chicago
-    network_mode: "host"
+    network_mode: "host"  # needs rootful
     logging:
       options:
         max-size: 10m
@@ -19,10 +19,10 @@ services:
       - /home/iurii/docker/adguardhome/work:/opt/adguardhome/work:Z
       - /home/iurii/docker/adguardhome/conf:/opt/adguardhome/conf:Z
       - /home/iurii/docker/adguardhome/certs:/certs:ro,Z
-    ports:
-      - "100.118.102.64:53:53/tcp"  # DNS
-      - "100.118.102.64:53:53/udp"
-      - "100.118.102.64:3003:3003"  # web UI
+    # ports: # if rootless, bind ports
+    #   - "100.118.102.64:53:53/tcp"  # DNS
+    #   - "100.118.102.64:53:53/udp"
+    #   - "100.118.102.64:3003:3003"  # web UI
     healthcheck:
       test: ["CMD-SHELL","wget -q --spider http://localhost:3003 || exit 1"]
       interval: 30s

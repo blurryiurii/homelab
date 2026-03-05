@@ -8,10 +8,11 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+    #ports:  # use for rootless
+    #  - "80:80"
+    #  - "443:443"
+    #  - "443:443/udp"
+    network_mode: host  # use for rootful
     healthcheck:
       test: ["CMD-SHELL","curl -k -f http://localhost:80 || exit 1"]
       interval: 30s
@@ -28,9 +29,3 @@ services:
       - /home/iurii/docker/caddy/Caddyfile:/etc/caddy/Caddyfile:Z
       - /home/iurii/docker/caddy/caddy_data:/data:Z
       - /home/iurii/docker/caddy/caddy_config:/config:Z
-    networks:
-      - shared
-
-networks:
-  shared:
-    external: true
