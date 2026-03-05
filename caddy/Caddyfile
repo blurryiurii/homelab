@@ -79,7 +79,7 @@ sonarr.iurii.io {
 	reverse_proxy http://localhost:8989
 }
 speedtest.iurii.io {
-	reverse_proxy http://localhost:80
+	reverse_proxy http://localhost:8081
 }
 syncthing.iurii.io {
 	reverse_proxy http://localhost:8384
