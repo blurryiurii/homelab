@@ -63,9 +63,6 @@ radicale/data/
 # Speedtest Tracker
 speedtest-tracker/config/
 
-# Syncthing
-syncthing/data/
-
 # Torrenting
 torrenting/*-config/
 
