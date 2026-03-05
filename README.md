@@ -86,6 +86,7 @@ If you're interested in a full media stack, there is an awesome repo [here](http
 - One of my most used services, keeping the same copy of files across all my personal devices
 - Synchronizes my phone's photos in seconds, enabling Immich to host the most up-to-date library
 - Very configurable - file versioning, restoring, ignore patterns...
+- I prefer to run this as a system service - simpler to set up!
 - available on iOS too
 
 ### Observability & Monitoring
