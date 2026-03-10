@@ -23,8 +23,6 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
-    networks:
-      - shared
     healthcheck:
       test: ["CMD", "cli/health.php"]
       timeout: 10s

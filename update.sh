@@ -28,7 +28,7 @@ fi
 
 for dir in */; do
   # Skip exceptions
-  excluded=( "caddy/" "adguardhome/" "overleaf/" "portainer/" )
+  excluded=( "caddy/" "adguardhome/" "overleaf/" "portainer/" "n8n/")
   skip=0
   for ex in "${excluded[@]}"; do
     [[ "$dir" == "$ex" ]] && { skip=1; break; }

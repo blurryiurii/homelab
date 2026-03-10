@@ -25,14 +25,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
-    #deploy:
-    #  resources:
-    #    reservations:
-    #      devices:
-    #        - driver: nvidia
-    #          count: 1
-    #          capabilities:
-    #            - gpu
+    networks:
+      - homeassistant
+
 # https://github.com/linuxserver/docker-faster-whisper
 # https://github.com/openai/whisper
   faster-whisper:
@@ -66,6 +61,9 @@ services:
               count: 1
               capabilities:
                 - gpu
+    networks:
+      - homeassistant
+
   piper:
     image: lscr.io/linuxserver/piper:latest
     container_name: piper
@@ -90,3 +88,8 @@ services:
         max-file: "3"
     security_opt:
       - no-new-privileges:true
+    networks:
+      - homeassistant
+
+networks:
+  homeassistant:

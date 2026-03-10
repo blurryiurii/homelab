@@ -68,6 +68,8 @@ services:
       options:
         max-size: 10m
         max-file: "3"
+    networks:
+      - shared
 
   redis:
     container_name: immich_redis
@@ -79,6 +81,8 @@ services:
       options:
         max-size: 10m
         max-file: "3"
+    networks:
+      - shared
 
   database:
     container_name: immich_postgres
@@ -102,6 +106,8 @@ services:
         max-size: 10m
         max-file: "3"
     shm_size: 128mb
+    networks:
+      - shared
 
 networks:
   shared:

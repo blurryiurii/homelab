@@ -25,7 +25,7 @@ adguardhome.iurii.io {
 	reverse_proxy http://localhost:3003
 }
 freshrss.iurii.io {
-	reverse_proxy http://localhost:80
+	reverse_proxy http://localhost:3004
 }
 homeassistant.iurii.io {
 	reverse_proxy http://localhost:8123
@@ -49,7 +49,7 @@ llm.iurii.io {
 	reverse_proxy http://localhost:11434
 }
 ntfy.iurii.io {
-	reverse_proxy http://localhost:80
+	reverse_proxy http://localhost:3002
 }
 n8n.iurii.io {
 	reverse_proxy http://localhost:5678
@@ -88,5 +88,5 @@ uptimekuma.iurii.io {
 	reverse_proxy http://localhost:3001
 }
 vaultwarden.iurii.io {
-	reverse_proxy http://localhost:80
+	reverse_proxy http://localhost:3005
 }
