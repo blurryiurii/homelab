@@ -13,8 +13,6 @@ services:
     volumes:
       - /home/iurii/docker/ntfy/cache:/var/cache/ntfy
       - /home/iurii/docker/ntfy/data:/etc/ntfy
-    ports:
-      - 127.0.0.1:3002:80
     healthcheck:
         test: ["CMD-SHELL", "wget -q --tries=1 http://localhost:80/v1/health -O - | grep -Eo '\"healthy\"\\s*:\\s*true' || exit 1"]
         interval: 60s
@@ -30,4 +28,5 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
+    network_mode: container:gluetun
     init: true # needed, if healthcheck is used. Prevents zombie processes

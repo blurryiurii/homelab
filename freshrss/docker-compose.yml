@@ -3,11 +3,11 @@
 ---
 services:
   freshrss:
-    image: freshrss/freshrss:edge
+    image: freshrss/freshrss:latest
     container_name: freshrss
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=America/Chicago
       # - TRUSTED_PROXY=172.16.0.1/12
     volumes:
@@ -23,6 +23,10 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
     healthcheck:
       test: ["CMD", "cli/health.php"]
       timeout: 10s
