@@ -52,7 +52,7 @@ ollama-openwebui/open-webui/
 ollama-openwebui/models/
 
 # Overleaf
-overleaf/
+overleaf/data/
 
 # Portainer
 portainer/portainer_data/
