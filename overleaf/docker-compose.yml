@@ -1,0 +1,87 @@
+name: overleaf
+services:
+  mongo:
+    command:
+      - --replSet
+      - overleaf
+    container_name: mongo
+    expose:
+      - "27017"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - echo 'db.stats().ok' | mongosh localhost:27017/test --quiet
+      timeout: 10s
+      interval: 10s
+      retries: 5
+    image: mongo:8.0
+    networks:
+      default: null
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/iurii/docker/overleaf/data/mongo
+        target: /data/db
+        bind: {}
+  redis:d
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+    container_name: redis
+    expose:
+      - "6379"
+    image: redis:7.4
+    networks:
+      default: null
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/iurii/docker/overleaf/data/redis
+        target: /data
+        bind: {}
+  sharelatex:
+    container_name: sharelatex
+    depends_on:
+      mongo:
+        condition: service_healthy
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    environment:
+      EMAIL_CONFIRMATION_DISABLED: "true"
+      ENABLE_CONVERSIONS: "true"
+      ENABLED_LINKED_FILE_TYPES: project_file,project_output_file
+      EXTERNAL_AUTH: none
+      GIT_BRIDGE_ENABLED: "false"
+      GIT_BRIDGE_HOST: git-bridge
+      GIT_BRIDGE_PORT: "8000"
+      OVERLEAF_APP_NAME: Overleaf
+      OVERLEAF_MONGO_URL: mongodb://mongo/sharelatex
+      OVERLEAF_REDIS_HOST: redis
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      V1_HISTORY_URL: http://sharelatex:3100/api
+    image: sharelatex/sharelatex:6.1.2
+    links:
+      - redis
+      - mongo
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 80
+        published: "8000"
+        protocol: tcp
+    restart: always
+    stop_grace_period: 1m0s
+    volumes:
+      - type: bind
+        source: /home/iurii/docker/overleaf/data/overleaf
+        target: /var/lib/overleaf
+        bind: {}
+networks:
+  default:
+    name: overleaf_default
