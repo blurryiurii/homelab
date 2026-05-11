@@ -5,6 +5,8 @@ services:
     # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
     cap_add:
       - NET_ADMIN
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
     devices:
       - /dev/net/tun:/dev/net/tun
     ports:
@@ -15,8 +17,6 @@ services:
       - 127.0.0.1:8686:8686  # lidarr
       - 127.0.0.1:9696:9696  # prowlarr
       - 127.0.0.1:8085:8085  # qbittorrent
-      - 127.0.0.1:8096:8096  # jellyfin
-      - 127.0.0.1:3002:80    # ntfy
     volumes:
       - /home/iurii/docker/gluetun/data:/gluetun
     env_file:

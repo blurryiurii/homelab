@@ -9,6 +9,8 @@ services:
       - serve
     environment:
       - TZ=America/Chicago
+    ports:
+      - 3002:80
     user: 1000:1000 # optional: replace with your own user/group or uid/gid
     volumes:
       - /home/iurii/docker/ntfy/cache:/var/cache/ntfy
@@ -28,5 +30,4 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
-    network_mode: container:gluetun
     init: true # needed, if healthcheck is used. Prevents zombie processes

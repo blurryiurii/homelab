@@ -109,7 +109,6 @@ services:
       options:
         max-size: 10m
         max-file: "3"
-
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent

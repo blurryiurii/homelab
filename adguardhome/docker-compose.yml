@@ -24,7 +24,7 @@ services:
     #   - "100.118.102.64:53:53/udp"
     #   - "100.118.102.64:3003:3003"  # web UI
     healthcheck:
-      test: ["CMD-SHELL","wget -q --spider http://localhost:3003 || exit 1"]
+      test: ["CMD-SHELL","wget -q --spider http://127.0.0.1:3003 || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3

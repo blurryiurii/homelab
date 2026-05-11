@@ -20,15 +20,24 @@ if [ -d "adguardhome" ]; then
   (cd "$SCRIPT_DIR/adguardhome" && sudo docker compose pull && sudo docker compose up -d --remove-orphans)
 fi
 
-# Overleaf: run overleaf/bin/upgrade, then up
-if [ -d "overleaf" ]; then
-  echo "Updating Overleaf"
-  (cd "$SCRIPT_DIR/overleaf" && ./bin/upgrade && ./bin/up -d)
+if [ -d "gluetun" ]; then
+  (cd "$SCRIPT_DIR/gluetun" && sudo docker compose pull && sudo docker compose up -d --remove-orphans)
 fi
+
+if [ -d "torrenting" ]; then
+  (cd "$SCRIPT_DIR/adguardhome" && sudo docker compose pull && sudo docker compose up -d --remove-orphans)
+fi
+
+
+# Overleaf: run overleaf/bin/upgrade, then up
+#if [ -d "overleaf" ]; then
+#  echo "Updating Overleaf"
+#  (cd "$SCRIPT_DIR/overleaf" && ./bin/upgrade && ./bin/up -d)
+#fi
 
 for dir in */; do
   # Skip exceptions
-  excluded=( "caddy/" "adguardhome/" "overleaf/" "portainer/" "n8n/")
+  excluded=( "caddy/" "adguardhome/" "gluetun/" "torrenting/" "n8n/")
   skip=0
   for ex in "${excluded[@]}"; do
     [[ "$dir" == "$ex" ]] && { skip=1; break; }

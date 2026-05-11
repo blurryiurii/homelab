@@ -17,16 +17,15 @@ services:
       options:
         max-size: 10m
         max-file: "3"
-    ports:
-    - "127.0.0.1:8123:8123"
+    network_mode: host
+    #ports:
+    #- "127.0.0.1:8123:8123"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8123"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 60s
-    networks:
-      - homeassistant
 
 # https://github.com/linuxserver/docker-faster-whisper
 # https://github.com/openai/whisper
@@ -61,8 +60,6 @@ services:
               count: 1
               capabilities:
                 - gpu
-    networks:
-      - homeassistant
 
   piper:
     image: lscr.io/linuxserver/piper:latest
@@ -88,8 +85,3 @@ services:
         max-file: "3"
     security_opt:
       - no-new-privileges:true
-    networks:
-      - homeassistant
-
-networks:
-  homeassistant:
