@@ -85,3 +85,15 @@ services:
         max-file: "3"
     security_opt:
       - no-new-privileges:true
+
+  matter-server:
+    image: ghcr.io/matter-js/python-matter-server:stable
+    container_name: matter-server
+    restart: unless-stopped
+    # Required for mDNS to work correctly
+    network_mode: host
+    security_opt:
+      # Needed for Bluetooth via dbus
+      - apparmor:unconfined
+    volumes:
+      - ./matter:/data

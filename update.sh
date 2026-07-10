@@ -28,6 +28,9 @@ if [ -d "torrenting" ]; then
   (cd "$SCRIPT_DIR/adguardhome" && sudo docker compose pull && sudo docker compose up -d --remove-orphans)
 fi
 
+if [ -d "homeassistant" ]; then
+  (cd "$SCRIPT_DIR/homeassistant" && sudo docker compose pull && sudo docker compose up -d --remove-orphans)
+fi
 
 # Overleaf: run overleaf/bin/upgrade, then up
 #if [ -d "overleaf" ]; then
@@ -37,7 +40,7 @@ fi
 
 for dir in */; do
   # Skip exceptions
-  excluded=( "caddy/" "adguardhome/" "gluetun/" "torrenting/" "n8n/")
+  excluded=( "caddy/" "adguardhome/" "gluetun/" "torrenting/" "n8n/" "homeassistant/" )
   skip=0
   for ex in "${excluded[@]}"; do
     [[ "$dir" == "$ex" ]] && { skip=1; break; }

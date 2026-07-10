@@ -22,6 +22,7 @@ gluetun/data/
 homeassistant/config/
 homeassistant/piper-data/
 homeassistant/whisper-data/
+homeassistant/matter
 
 # Homepage
 homepage/config/
