@@ -14,7 +14,9 @@ services:
       timeout: 10s
       interval: 10s
       retries: 5
-    image: mongo:8.0
+    image: mongo:8.3.2
+    environment:
+      - GLIBC_TUNABLES=glibc.cpu.hwcaps=-SHSTK
     networks:
       default: null
     restart: always
@@ -23,7 +25,7 @@ services:
         source: /home/iurii/docker/overleaf/data/mongo
         target: /data/db
         bind: {}
-  redis:d
+  redis:
     command:
       - redis-server
       - --appendonly
